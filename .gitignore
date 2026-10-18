@@ -1,0 +1,5 @@
+data/
+processed/
+__pycache__/
+venv/
+candidate_plots/

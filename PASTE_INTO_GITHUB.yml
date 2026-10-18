@@ -1,0 +1,81 @@
+name: Star Discovery 24/7
+
+# Fully automatic. Every 6 hours GitHub starts this on ITS OWN computers:
+#  - first run: downloads NASA data, trains the AI, saves it to model/
+#  - every run after: scans ~5 hours of NEW stars and saves leads to candidates/
+# Results: open candidates/novel_leads.csv in your repo.
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: star-discovery
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 345
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Is the AI already trained?
+        id: check
+        run: |
+          if [ -f model/ensemble_config.txt ]; then echo "trained=true" >> "$GITHUB_OUTPUT"; else echo "trained=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Restore downloaded NASA data
+        if: steps.check.outputs.trained == 'false'
+        uses: actions/cache/restore@v4
+        with:
+          path: data
+          key: nasa-data-${{ github.run_id }}
+          restore-keys: nasa-data-
+      - name: Train the AI (first run only)
+        if: steps.check.outputs.trained == 'false'
+        run: python run_all.py --n_positive 100 --n_negative 200 --augment_per_negative 1 --n_models 3 --epochs 40 --fetch_budget_min 150
+      - name: Save downloaded NASA data
+        if: always() && steps.check.outputs.trained == 'false'
+        uses: actions/cache/save@v4
+        with:
+          path: data
+          key: nasa-data-${{ github.run_id }}
+
+      - name: Scan NASA data for new stars
+        if: steps.check.outputs.trained == 'true'
+        run: python predict.py --model_dir model --outdir candidates --auto_targets 1500 --time_budget_min 300 --append
+
+      - name: Draw pictures of the best leads
+        if: steps.check.outputs.trained == 'true'
+        run: python make_leads_page.py || true
+
+      - name: Email me if there is a strong lead
+        id: notify
+        if: steps.check.outputs.trained == 'true'
+        run: python notify.py || true
+
+      - name: Save results to the repo
+        if: always()
+        run: |
+          git config user.name "star-discovery-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -f model/ || true
+          git add candidates/ || true
+          git diff --cached --quiet || git commit -m "Update $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase || true
+          git push
+
+      - name: Open an issue (GitHub emails you)
+        if: steps.notify.outputs.has_new == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh issue create --title "$(cat candidates/issue_title.txt)" --body-file candidates/issue_body.md
