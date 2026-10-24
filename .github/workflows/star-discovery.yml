@@ -1,6 +1,7 @@
 name: Star Discovery 24/7
 
-# Fully automatic. Every 6 hours GitHub starts this on ITS OWN computers:
+# Fully automatic and (almost) non-stop: each run starts the next one the moment it finishes;
+# the 6-hour schedule below is only a safety net. GitHub runs this on ITS OWN computers:
 #  - first run: downloads NASA data, trains the AI, saves it to model/
 #  - every run after: scans ~5 hours of NEW stars and saves leads to candidates/
 # Results: open candidates/novel_leads.csv in your repo.
@@ -12,6 +13,7 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: write
 
 concurrency:
   group: star-discovery
@@ -20,9 +22,11 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 345
+    timeout-minutes: 358
     steps:
       - uses: actions/checkout@v4
+      - name: Remember start time
+        run: echo "START=$(date +%s)" >> "$GITHUB_ENV"
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -52,16 +56,17 @@ jobs:
 
       - name: Scan NASA data for new stars
         if: steps.check.outputs.trained == 'true'
-        run: python predict.py --model_dir model --outdir candidates --auto_targets 1500 --time_budget_min 300 --append
+        run: python predict.py --model_dir model --outdir candidates --auto_targets 1500 --time_budget_min 330 --append
 
       - name: Draw pictures of the best leads
         if: steps.check.outputs.trained == 'true'
         run: python make_leads_page.py || true
 
-      - name: Email me if there is a strong lead
+      - name: Weekly digest email (only if there is a strong lead)
         id: notify
         if: steps.check.outputs.trained == 'true'
-        run: python notify.py || true
+        # One digest at most every 168 hours (weekly). Use 72 for every 3 days, 24 for daily.
+        run: python notify.py --min_hours 168 || true
 
       - name: Save results to the repo
         if: always()
@@ -79,3 +84,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh issue create --title "$(cat candidates/issue_title.txt)" --body-file candidates/issue_body.md
+
+      - name: Start the next run immediately (this is what makes it 24/7)
+        # Skipped if you cancelled the run, or if this run failed within 15 minutes
+        # (prevents an endless fast-fail loop; the 6-hour schedule then retries).
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ELAPSED=$(( $(date +%s) - START ))
+          echo "This run lasted ${ELAPSED}s"
+          if [ "$ELAPSED" -gt 900 ]; then gh workflow run star-discovery.yml --ref main; else echo "Too short - not chaining."; fi
