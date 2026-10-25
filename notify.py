@@ -3,7 +3,7 @@ notify.py - ONE digest email per week at most (change --min_hours in the workflo
 Only STRONG leads are included (not in any catalog + very clean repeating shape), max 5, each only once.
 The email contains: a picture, copy-paste values for the AAVSO form, and the links you need.
 """
-import os, io, time, argparse, urllib.parse, urllib.request
+import os, io, json, time, argparse, urllib.parse, urllib.request
 import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
@@ -66,6 +66,37 @@ def is_strong(r):
     return bool(wave or dip)
 
 
+VSX_API = "https://www.aavso.org/vsx/index.php"
+
+
+def live_vsx_known(ra, dec, radius_arcsec=42.0):
+    """LIVE AAVSO VSX lookup (the VizieR copy used during scanning can be months old).
+    Radius 42" = 2 TESS pixels: a known variable that close could be the real source of the signal.
+    Returns (True/False/None, name). None = could not check (network/format problem)."""
+    q = urllib.parse.urlencode({"view": "api.list", "ra": f"{ra:.6f}", "dec": f"{dec:.6f}",
+                                "radius": f"{radius_arcsec / 3600:.6f}", "tomag": "25", "format": "json"})
+    try:
+        with urllib.request.urlopen(f"{VSX_API}?{q}", timeout=40) as resp:
+            data = json.loads(resp.read().decode("utf-8", "replace"))
+    except Exception as e:
+        print("live VSX check failed:", e)
+        return None, None
+    names = []
+
+    def walk(x):
+        if isinstance(x, dict):
+            for k, v in x.items():
+                if str(k).lower() == "name" and isinstance(v, str):
+                    names.append(v)
+                else:
+                    walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+    walk(data)
+    return (len(names) > 0), (names[0] if names else None)
+
+
 def hms(x_deg):
     """RA in degrees -> 'HH MM SS.ss' (integer maths, no 60.00 rounding glitches)."""
     t = round(x_deg / 15.0 * 360000) % (24 * 360000)
@@ -99,6 +130,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dir", default="candidates")
     ap.add_argument("--max", type=int, default=5)
+    ap.add_argument("--skip_live_check", action="store_true", help="Do not re-check live VSX before emailing.")
     ap.add_argument("--min_hours", type=float, default=168, help="Minimum hours between emails (168 = weekly).")
     a = ap.parse_args()
     leads_p = os.path.join(a.dir, "novel_leads.csv")
@@ -130,7 +162,48 @@ def main():
     if df.empty:
         return done(False)
     df["priority"] = df[["mean_score", "ls_power"]].max(axis=1)
-    df = df.sort_values("priority", ascending=False).head(a.max)
+    df = df.sort_values("priority", ascending=False)
+
+    # FINAL CHECK right before emailing: drop anything the live VSX already knows.
+    keep, dropped, live = [], [], {}
+    for _, r in df.iterrows():
+        if len(keep) >= a.max:
+            break
+        if a.skip_live_check:
+            known, vname = None, None
+        else:
+            known, vname = live_vsx_known(float(r["ra"]), float(r["dec"]))
+            time.sleep(1)
+        if known:
+            dropped.append({"tic": r["tic"], "vsx_name": vname,
+                            "checked_at": time.strftime("%Y-%m-%d %H:%M", time.gmtime())})
+            continue
+        live[r["tic"]] = known
+        keep.append(r["tic"])
+    if dropped:
+        dp = os.path.join(a.dir, "rechecked_known.csv")
+        old_d = pd.read_csv(dp) if os.path.exists(dp) else pd.DataFrame()
+        pd.concat([old_d, pd.DataFrame(dropped)]).to_csv(dp, index=False)
+        gone = [d["tic"] for d in dropped]
+        open(note_p, "a").write("\n".join(gone) + "\n")                    # never email these
+        try:   # bookkeeping must never be able to block the email itself
+            lp = pd.read_csv(leads_p)
+            lp[~lp["tic"].isin(gone)].to_csv(leads_p, index=False)
+            rp = os.path.join(a.dir, "ranked_candidates.csv")                # make LEADS.md honest too
+            if os.path.exists(rp):
+                rk = pd.read_csv(rp)
+                for col in ("already_known", "catalog_type"):
+                    rk[col] = rk[col].astype(object) if col in rk.columns else None
+                m = rk["tic"].isin(gone)
+                rk.loc[m, "already_known"] = True
+                rk.loc[m, "catalog_type"] = "VSX-live"
+                rk.to_csv(rp, index=False)
+        except Exception as e:
+            print("bookkeeping after live check failed (email continues):", e)
+        print(f"Dropped {len(dropped)} lead(s) already in the live VSX:", ", ".join(gone))
+    df = df[df["tic"].isin(keep)]
+    if df.empty:
+        return done(False)
 
     repo = os.environ.get("GITHUB_REPOSITORY", "YOU/star-discovery")
     owner = os.environ.get("GITHUB_REPOSITORY_OWNER", "")
@@ -171,27 +244,26 @@ def main():
               (f"![sky photo of {r['tic']}]({sky_url})\n_Real sky photo (DSS2, 3 arcminutes wide, north up). The circles are 1 and 2 TESS pixels. "
                "TESS adds up ALL the light inside them, so if other bright stars sit inside, the signal could come from one of those instead._"
                if sky_url else "_(Sky photo unavailable this time.)_"),
-              "Copy-paste values for the form:",
-              "```",
-              f"Name / ID:        {r['tic']} (TESS)",
-              f"RA  (deg, J2000): {float(r['ra']):.5f}",
-              f"Dec (deg, J2000): {float(r['dec']):+.5f}",
-              f"RA  (h m s):      {hms(float(r['ra']))}",
-              f"Dec (d m s):      {dms(float(r['dec']))}",
-              "Position source:  TESS Input Catalog (TIC, Gaia-based), J2000",
-              f"Type (best guess): {vtype}   <- pick the closest in the dropdown",
-              f"Period (days):    {float(period):.5f}",
-              f"Amplitude:        about {float(amp):.3f} mag (TESS band)",
-              "Source:           NASA TESS 2-minute light curves (MAST), found by an automated search",
-              "```",
-              "Notes box (paste this):",
-              "```",
-              f"Found in NASA TESS 2-minute photometry (SPOC light curves from MAST) with an automated period search. "
-              f"Star is TIC {num}. Period and amplitude are in the TESS band (about 600-1000 nm, red-sensitive), so the "
-              f"amplitude differs from V-band. The period was found automatically and may be half the true period if this "
-              f"is a two-star system. At the time of the search the position had no variable or binary entry in SIMBAD, "
-              f"AAVSO VSX, Gaia DR3 variability or ASAS-SN.",
-              "```",
+              ("Live VSX check just now: nothing within 42 arcseconds (about 2 TESS pixels)." if live.get(r["tic"]) is False
+               else "_Live VSX check could not run just now - rely on the Spot check in the form._"),
+              "**Fill the form from top to bottom. Each grey box is ONE field: tap it, copy, paste.**\n",
+              "**Primary name**", "```", f"{r['tic']}", "```",
+              "**Discoverer** (your own name, the way you want to be credited)\n",
+              "**Position - RA** (hours minutes seconds)", "```", hms(float(r['ra'])), "```",
+              "**Position - Dec** (degrees arcmin arcsec)", "```", dms(float(r['dec'])), "```",
+              f"_If the form wants plain degrees instead: RA {float(r['ra']):.5f}, Dec {float(r['dec']):+.5f}_\n",
+              "**Variability type** (pick it in the dropdown)", "```", vtype, "```",
+              "**Period (days)**", "```", f"{float(period):.5f}", "```",
+              "**Passband** (if TESS is not in the list, leave blank)", "```", "TESS", "```",
+              "**Epoch, Max magnitude, Min magnitude:** leave blank if you have no value for them (the pipeline does not measure them).\n",
+              "**Remarks**", "```",
+              f"Found in NASA TESS 2-minute photometry (TIC {num}) with an automated period search. "
+              f"Amplitude about {float(amp):.3f} mag in the TESS band (red-sensitive, so it differs from V-band). "
+              f"The period was found automatically and may be half the true period if this is a two-star system.", "```",
+              "**Reference / data source**", "```",
+              "NASA TESS 2-minute light curves (SPOC, MAST). Position from the TESS Input Catalog (TIC, Gaia-based), J2000.", "```",
+              "**Light curve / phase plot upload:** attach the picture above (open it full size, then save it).\n",
+              "**Tip:** tick **Draft only** the first time. You can save, look it over, and only then submit for real.\n",
               f"[Open AAVSO VSX]({VSX}) | [VSX coordinate search]({VSX_SEARCH}) | "
               f"[Double-check in SIMBAD]({simbad}) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id={num})"]
         if r["likely_type"] == "likely_planet_transit" and r["variability_type"] != "likely_pulsating_or_rotating_variable":
