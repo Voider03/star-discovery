@@ -10,7 +10,7 @@ If a picture looks GOOD: click the SIMBAD link, and if the star shows no variabl
 submit it at https://www.aavso.org/vsx (Submit new variable).
 
 
-644 leads total; showing the top 50.
+675 leads total; showing the top 50.
 
 ## TIC 122220263  -  unclassified_periodic_variable / no_significant_variability
 
@@ -32,6 +32,13 @@ submit it at https://www.aavso.org/vsx (Submit new variable).
 - [Check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=251.880139886882+46.1915276412249&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=115410334)
 
 ![TIC 115410334](plots/TIC_115410334.png)
+
+## TIC 384882500  -  unclassified_periodic_variable / no_significant_variability
+
+- AI score: 0.97 | wave period: 2.166 d | dip period hint: 17.320 d
+- [Check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=16.4010812733209+16.8863764155061&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=384882500)
+
+![TIC 384882500](plots/TIC_384882500.png)
 
 ## TIC 260301742  -  likely_planet_transit / likely_pulsating_or_rotating_variable
 
@@ -222,6 +229,13 @@ submit it at https://www.aavso.org/vsx (Submit new variable).
 
 ![TIC 441736986](plots/TIC_441736986.png)
 
+## TIC 13862266  -  unclassified_periodic_variable / likely_pulsating_or_rotating_variable
+
+- AI score: 0.03 | wave period: 0.656 d | dip period hint: 0.657 d
+- [Check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=12.2806162844053+28.4302702821113&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=13862266)
+
+![TIC 13862266](plots/TIC_13862266.png)
+
 ## TIC 391891749  -  unclassified_periodic_variable / likely_pulsating_or_rotating_variable
 
 - AI score: 0.19 | wave period: 2.662 d | dip period hint: 2.660 d
@@ -292,6 +306,13 @@ submit it at https://www.aavso.org/vsx (Submit new variable).
 
 ![TIC 209217764](plots/TIC_209217764.png)
 
+## TIC 58032422  -  unclassified_periodic_variable / likely_pulsating_or_rotating_variable
+
+- AI score: 0.47 | wave period: 0.062 d | dip period hint: 0.555 d
+- [Check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=6.01382962685387+31.1884952167972&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=58032422)
+
+![TIC 58032422](plots/TIC_58032422.png)
+
 ## TIC 155995204  -  likely_planet_transit / no_significant_variability
 
 - AI score: 0.88 | wave period: 0.548 d | dip period hint: 9.314 d
@@ -334,30 +355,9 @@ submit it at https://www.aavso.org/vsx (Submit new variable).
 
 ![TIC 354556435](plots/TIC_354556435.png)
 
-## TIC 87597187  -  likely_planet_transit / likely_pulsating_or_rotating_variable
+## TIC 74197071  -  unclassified_periodic_variable / likely_pulsating_or_rotating_variable
 
-- AI score: 0.87 | wave period: 2.056 d | dip period hint: 2.045 d
-- [Check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=81.5782548998008+47.0737816074643&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=87597187)
+- AI score: 0.00 | wave period: 0.332 d | dip period hint: 0.663 d
+- [Check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=137.209289170431+-46.4330230217289&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=74197071)
 
-![TIC 87597187](plots/TIC_87597187.png)
-
-## TIC 102929927  -  likely_eclipsing_binary / no_significant_variability
-
-- AI score: 0.87 | wave period: 1.382 d | dip period hint: 5.529 d
-- [Check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=131.928182372564+71.2602323449365&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=102929927)
-
-![TIC 102929927](plots/TIC_102929927.png)
-
-## TIC 140691463  -  unclassified_periodic_variable / no_significant_variability
-
-- AI score: 0.87 | wave period: 2.083 d | dip period hint: 2.085 d
-- [Check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=73.7012208916577+-76.6805246012636&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=140691463)
-
-![TIC 140691463](plots/TIC_140691463.png)
-
-## TIC 138329479  -  unclassified_periodic_variable / no_significant_variability
-
-- AI score: 0.87 | wave period: 0.396 d | dip period hint: 2.374 d
-- [Check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=83.0879552615799+79.8091280395454&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=138329479)
-
-![TIC 138329479](plots/TIC_138329479.png)
+![TIC 74197071](plots/TIC_74197071.png)
