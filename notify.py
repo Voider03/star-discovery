@@ -131,6 +131,8 @@ def main():
     ap.add_argument("--dir", default="candidates")
     ap.add_argument("--max", type=int, default=5)
     ap.add_argument("--skip_live_check", action="store_true", help="Do not re-check live VSX before emailing.")
+    ap.add_argument("--fallback_days", type=float, default=14,
+                    help="If no STRONG lead exists and no email went out for this many days, send the best clean leads anyway.")
     ap.add_argument("--min_hours", type=float, default=168, help="Minimum hours between emails (168 = weekly).")
     a = ap.parse_args()
     leads_p = os.path.join(a.dir, "novel_leads.csv")
@@ -143,6 +145,7 @@ def main():
             open(out, "a").write(f"has_new={'true' if has_new else 'false'}\n")
         print("has_new =", has_new)
 
+    last = 0.0
     if os.path.exists(last_p):
         try:
             last = float(open(last_p).read().strip())
@@ -158,9 +161,13 @@ def main():
         return done(False)
     seen = set(open(note_p).read().split("\n")) if os.path.exists(note_p) else set()
     df = df[~df["tic"].isin(seen)]
+    unseen, fallback = df, False
     df = df[df.apply(lambda r: is_strong(r.to_dict()), axis=1)]
     if df.empty:
-        return done(False)
+        if (not unseen.empty) and time.time() - last > a.fallback_days * 86400:
+            df, fallback, a.max = unseen.copy(), True, min(a.max, 3)   # best of the rest, so you are never left in silence
+        else:
+            return done(False)
     df["priority"] = df[["mean_score", "ls_power"]].max(axis=1)
     df = df.sort_values("priority", ascending=False)
 
@@ -208,7 +215,9 @@ def main():
     repo = os.environ.get("GITHUB_REPOSITORY", "YOU/star-discovery")
     owner = os.environ.get("GITHUB_REPOSITORY_OWNER", "")
     plots = os.path.join(a.dir, "plots")
-    L = [f"@{owner} here are your best new leads this week ({len(df)}). Each one is NOT in SIMBAD, AAVSO VSX, "
+    intro = (f"there was no top-tier lead this period, so here are the best {len(df)} of the rest (less certain)."
+             if fallback else f"here are your best new leads this week ({len(df)}).")
+    L = [f"@{owner} {intro} Each one is NOT in SIMBAD, AAVSO VSX, "
          "Gaia DR3 variables or ASAS-SN, and shows a clean, repeating shape.\n",
          "## What to do (about 2 minutes per lead)",
          "1. **Look at the picture.** If the bottom two graphs show a thin, clean curve, continue. "
