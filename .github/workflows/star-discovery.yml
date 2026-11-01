@@ -56,24 +56,29 @@ jobs:
 
       - name: Scan NASA data for new stars
         if: steps.check.outputs.trained == 'true'
-        run: python predict.py --model_dir model --outdir candidates --auto_targets 1500 --time_budget_min 330 --append
+        timeout-minutes: 322
+        run: python predict.py --model_dir model --outdir candidates --auto_targets 1500 --time_budget_min 310 --append
 
       - name: Draw pictures of the best leads
-        if: steps.check.outputs.trained == 'true'
+        if: always() && steps.check.outputs.trained == 'true'
+        timeout-minutes: 8
         run: python make_leads_page.py || true
 
       - name: Weekly digest email (only if there is a strong lead)
         id: notify
-        if: steps.check.outputs.trained == 'true'
+        if: always() && steps.check.outputs.trained == 'true'
+        timeout-minutes: 10
         # One digest at most every 168 hours (weekly). Use 72 for every 3 days, 24 for daily.
         run: python notify.py --min_hours 168 || echo "notify.py FAILED - see the error above"
 
       - name: Write status page (why am I not getting email?)
         if: always() && steps.check.outputs.trained == 'true'
+        timeout-minutes: 2
         run: python status.py || true
 
       - name: Save results to the repo
         if: always()
+        timeout-minutes: 3
         run: |
           git config user.name "star-discovery-bot"
           git config user.email "actions@users.noreply.github.com"
