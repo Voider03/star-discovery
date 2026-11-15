@@ -14,28 +14,28 @@
 - **VAR** = generic variable. If you are unsure, this is the safe choice.
 
 ---
-### TIC 328961567 - best guess: pulsating or spinning variable star
-![TIC 328961567](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_328961567.png)
-[Open the picture full size](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_328961567.png)
+### TIC 470085533 - best guess: pulsating or spinning variable star
+![TIC 470085533](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_470085533.png)
+[Open the picture full size](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_470085533.png)
 _(Sky photo unavailable this time.)_
 _Live VSX check could not run just now - rely on the Spot check in the form._
 **Fill the form from top to bottom. Each grey box is ONE field: tap it, copy, paste.**
 
 **Primary name**
 ```
-TIC 328961567
+TIC 470085533
 ```
 **Discoverer** (your own name, the way you want to be credited)
 
 **Position - RA** (hours minutes seconds)
 ```
-12 22 10.83
+21 46 22.31
 ```
 **Position - Dec** (degrees arcmin arcsec)
 ```
-+24 46 25.9
++80 05 23.6
 ```
-_If the form wants plain degrees instead: RA 185.54511, Dec +24.77387_
+_If the form wants plain degrees instead: RA 326.59297, Dec +80.08988_
 
 **Variability type** (pick it in the dropdown)
 ```
@@ -43,7 +43,7 @@ VAR
 ```
 **Period (days)**
 ```
-2.39143
+2.33169
 ```
 **Passband** (if TESS is not in the list, leave blank)
 ```
@@ -53,7 +53,7 @@ TESS
 
 **Remarks**
 ```
-Found in NASA TESS 2-minute photometry (TIC 328961567) with an automated period search. Amplitude about 0.007 mag in the TESS band (red-sensitive, so it differs from V-band). The period was found automatically and may be half the true period if this is a two-star system.
+Found in NASA TESS 2-minute photometry (TIC 470085533) with an automated period search. Amplitude about 0.005 mag in the TESS band (red-sensitive, so it differs from V-band). The period was found automatically and may be half the true period if this is a two-star system.
 ```
 **Reference / data source**
 ```
@@ -63,31 +63,31 @@ NASA TESS 2-minute light curves (SPOC, MAST). Position from the TESS Input Catal
 
 **Tip:** tick **Draft only** the first time. You can save, look it over, and only then submit for real.
 
-[Open AAVSO VSX](https://vsx.aavso.org) | [VSX coordinate search](https://www.aavso.org/vsx/index.php?view=search.top) | [Double-check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=185.545111256323+24.7738671330881&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=328961567)
+[Open AAVSO VSX](https://vsx.aavso.org) | [VSX coordinate search](https://www.aavso.org/vsx/index.php?view=search.top) | [Double-check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=326.592966856589+80.0898786806288&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=470085533)
 
 ---
-### TIC 260132330 - best guess: repeating dip (could be a planet or a binary)
-![TIC 260132330](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_260132330.png)
-[Open the picture full size](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_260132330.png)
+### TIC 437041669 - best guess: pulsating or spinning variable star
+![TIC 437041669](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_437041669.png)
+[Open the picture full size](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_437041669.png)
 _(Sky photo unavailable this time.)_
 _Live VSX check could not run just now - rely on the Spot check in the form._
 **Fill the form from top to bottom. Each grey box is ONE field: tap it, copy, paste.**
 
 **Primary name**
 ```
-TIC 260132330
+TIC 437041669
 ```
 **Discoverer** (your own name, the way you want to be credited)
 
 **Position - RA** (hours minutes seconds)
 ```
-06 10 23.29
+08 56 19.55
 ```
 **Position - Dec** (degrees arcmin arcsec)
 ```
--56 22 39.8
++12 39 49.8
 ```
-_If the form wants plain degrees instead: RA 92.59702, Dec -56.37772_
+_If the form wants plain degrees instead: RA 134.08144, Dec +12.66383_
 
 **Variability type** (pick it in the dropdown)
 ```
@@ -95,7 +95,7 @@ VAR
 ```
 **Period (days)**
 ```
-17.30075
+0.26246
 ```
 **Passband** (if TESS is not in the list, leave blank)
 ```
@@ -105,7 +105,7 @@ TESS
 
 **Remarks**
 ```
-Found in NASA TESS 2-minute photometry (TIC 260132330) with an automated period search. Amplitude about 0.052 mag in the TESS band (red-sensitive, so it differs from V-band). The period was found automatically and may be half the true period if this is a two-star system.
+Found in NASA TESS 2-minute photometry (TIC 437041669) with an automated period search. Amplitude about 0.018 mag in the TESS band (red-sensitive, so it differs from V-band). The period was found automatically and may be half the true period if this is a two-star system.
 ```
 **Reference / data source**
 ```
@@ -115,32 +115,31 @@ NASA TESS 2-minute light curves (SPOC, MAST). Position from the TESS Input Catal
 
 **Tip:** tick **Draft only** the first time. You can save, look it over, and only then submit for real.
 
-[Open AAVSO VSX](https://vsx.aavso.org) | [VSX coordinate search](https://www.aavso.org/vsx/index.php?view=search.top) | [Double-check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=92.5970231340478+-56.3777217671456&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=260132330)
-_This one looks like a planet-style dip. The TESS page link is the better place to report it._
+[Open AAVSO VSX](https://vsx.aavso.org) | [VSX coordinate search](https://www.aavso.org/vsx/index.php?view=search.top) | [Double-check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=134.081441076229+12.6638277112855&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=437041669)
 
 ---
-### TIC 233053554 - best guess: repeating dip (could be a planet or a binary)
-![TIC 233053554](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_233053554.png)
-[Open the picture full size](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_233053554.png)
+### TIC 134435935 - best guess: pulsating or spinning variable star
+![TIC 134435935](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_134435935.png)
+[Open the picture full size](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_134435935.png)
 _(Sky photo unavailable this time.)_
 _Live VSX check could not run just now - rely on the Spot check in the form._
 **Fill the form from top to bottom. Each grey box is ONE field: tap it, copy, paste.**
 
 **Primary name**
 ```
-TIC 233053554
+TIC 134435935
 ```
 **Discoverer** (your own name, the way you want to be credited)
 
 **Position - RA** (hours minutes seconds)
 ```
-17 56 43.04
+07 11 48.85
 ```
 **Position - Dec** (degrees arcmin arcsec)
 ```
-+64 46 00.3
+-47 30 23.9
 ```
-_If the form wants plain degrees instead: RA 269.17932, Dec +64.76674_
+_If the form wants plain degrees instead: RA 107.95353, Dec -47.50663_
 
 **Variability type** (pick it in the dropdown)
 ```
@@ -148,7 +147,7 @@ VAR
 ```
 **Period (days)**
 ```
-4.56733
+1.66119
 ```
 **Passband** (if TESS is not in the list, leave blank)
 ```
@@ -158,7 +157,7 @@ TESS
 
 **Remarks**
 ```
-Found in NASA TESS 2-minute photometry (TIC 233053554) with an automated period search. Amplitude about 0.018 mag in the TESS band (red-sensitive, so it differs from V-band). The period was found automatically and may be half the true period if this is a two-star system.
+Found in NASA TESS 2-minute photometry (TIC 134435935) with an automated period search. Amplitude about 0.009 mag in the TESS band (red-sensitive, so it differs from V-band). The period was found automatically and may be half the true period if this is a two-star system.
 ```
 **Reference / data source**
 ```
@@ -168,32 +167,31 @@ NASA TESS 2-minute light curves (SPOC, MAST). Position from the TESS Input Catal
 
 **Tip:** tick **Draft only** the first time. You can save, look it over, and only then submit for real.
 
-[Open AAVSO VSX](https://vsx.aavso.org) | [VSX coordinate search](https://www.aavso.org/vsx/index.php?view=search.top) | [Double-check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=269.179321713282+64.7667382293543&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=233053554)
-_This one looks like a planet-style dip. The TESS page link is the better place to report it._
+[Open AAVSO VSX](https://vsx.aavso.org) | [VSX coordinate search](https://www.aavso.org/vsx/index.php?view=search.top) | [Double-check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=107.953534723684+-47.5066322601037&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=134435935)
 
 ---
-### TIC 261335113 - best guess: repeating dip (could be a planet or a binary)
-![TIC 261335113](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_261335113.png)
-[Open the picture full size](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_261335113.png)
+### TIC 247465254 - best guess: pulsating or spinning variable star
+![TIC 247465254](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_247465254.png)
+[Open the picture full size](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_247465254.png)
 _(Sky photo unavailable this time.)_
 _Live VSX check could not run just now - rely on the Spot check in the form._
 **Fill the form from top to bottom. Each grey box is ONE field: tap it, copy, paste.**
 
 **Primary name**
 ```
-TIC 261335113
+TIC 247465254
 ```
 **Discoverer** (your own name, the way you want to be credited)
 
 **Position - RA** (hours minutes seconds)
 ```
-06 09 20.37
+05 42 45.42
 ```
 **Position - Dec** (degrees arcmin arcsec)
 ```
--80 41 39.4
++12 42 20.7
 ```
-_If the form wants plain degrees instead: RA 92.33487, Dec -80.69427_
+_If the form wants plain degrees instead: RA 85.68927, Dec +12.70576_
 
 **Variability type** (pick it in the dropdown)
 ```
@@ -201,7 +199,7 @@ VAR
 ```
 **Period (days)**
 ```
-8.13022
+0.36363
 ```
 **Passband** (if TESS is not in the list, leave blank)
 ```
@@ -211,7 +209,7 @@ TESS
 
 **Remarks**
 ```
-Found in NASA TESS 2-minute photometry (TIC 261335113) with an automated period search. Amplitude about 0.261 mag in the TESS band (red-sensitive, so it differs from V-band). The period was found automatically and may be half the true period if this is a two-star system.
+Found in NASA TESS 2-minute photometry (TIC 247465254) with an automated period search. Amplitude about 0.069 mag in the TESS band (red-sensitive, so it differs from V-band). The period was found automatically and may be half the true period if this is a two-star system.
 ```
 **Reference / data source**
 ```
@@ -221,32 +219,31 @@ NASA TESS 2-minute light curves (SPOC, MAST). Position from the TESS Input Catal
 
 **Tip:** tick **Draft only** the first time. You can save, look it over, and only then submit for real.
 
-[Open AAVSO VSX](https://vsx.aavso.org) | [VSX coordinate search](https://www.aavso.org/vsx/index.php?view=search.top) | [Double-check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=92.3348671313104+-80.6942695924553&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=261335113)
-_This one looks like a planet-style dip. The TESS page link is the better place to report it._
+[Open AAVSO VSX](https://vsx.aavso.org) | [VSX coordinate search](https://www.aavso.org/vsx/index.php?view=search.top) | [Double-check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=85.6892653391974+12.7057575438745&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=247465254)
 
 ---
-### TIC 239726441 - best guess: pulsating or spinning variable star
-![TIC 239726441](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_239726441.png)
-[Open the picture full size](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_239726441.png)
+### TIC 264730114 - best guess: pulsating or spinning variable star
+![TIC 264730114](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_264730114.png)
+[Open the picture full size](https://raw.githubusercontent.com/Voider03/star-discovery/main/candidates/plots/TIC_264730114.png)
 _(Sky photo unavailable this time.)_
 _Live VSX check could not run just now - rely on the Spot check in the form._
 **Fill the form from top to bottom. Each grey box is ONE field: tap it, copy, paste.**
 
 **Primary name**
 ```
-TIC 239726441
+TIC 264730114
 ```
 **Discoverer** (your own name, the way you want to be credited)
 
 **Position - RA** (hours minutes seconds)
 ```
-05 45 54.95
+02 19 01.56
 ```
 **Position - Dec** (degrees arcmin arcsec)
 ```
-+33 43 09.6
++57 05 22.5
 ```
-_If the form wants plain degrees instead: RA 86.47895, Dec +33.71932_
+_If the form wants plain degrees instead: RA 34.75649, Dec +57.08958_
 
 **Variability type** (pick it in the dropdown)
 ```
@@ -254,7 +251,7 @@ VAR
 ```
 **Period (days)**
 ```
-1.91396
+2.52602
 ```
 **Passband** (if TESS is not in the list, leave blank)
 ```
@@ -264,7 +261,7 @@ TESS
 
 **Remarks**
 ```
-Found in NASA TESS 2-minute photometry (TIC 239726441) with an automated period search. Amplitude about 0.046 mag in the TESS band (red-sensitive, so it differs from V-band). The period was found automatically and may be half the true period if this is a two-star system.
+Found in NASA TESS 2-minute photometry (TIC 264730114) with an automated period search. Amplitude about 0.039 mag in the TESS band (red-sensitive, so it differs from V-band). The period was found automatically and may be half the true period if this is a two-star system.
 ```
 **Reference / data source**
 ```
@@ -274,4 +271,4 @@ NASA TESS 2-minute light curves (SPOC, MAST). Position from the TESS Input Catal
 
 **Tip:** tick **Draft only** the first time. You can save, look it over, and only then submit for real.
 
-[Open AAVSO VSX](https://vsx.aavso.org) | [VSX coordinate search](https://www.aavso.org/vsx/index.php?view=search.top) | [Double-check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=86.4789502341242+33.7193236484379&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=239726441)
+[Open AAVSO VSX](https://vsx.aavso.org) | [VSX coordinate search](https://www.aavso.org/vsx/index.php?view=search.top) | [Double-check in SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-coord?Coord=34.7564948029802+57.0895767082136&CooFrame=FK5&CooEpoch=2000&Radius=2&Radius.unit=arcmin&submit=submit+query) | [TESS page](https://exofop.ipac.caltech.edu/tess/target.php?id=264730114)
