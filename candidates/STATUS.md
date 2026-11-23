@@ -1,12 +1,12 @@
 # Pipeline status
 
-_Updated 2026-11-22 23:21 UTC_
+_Updated 2026-11-23 04:37 UTC_
 
 **Why you may not have an email:** An email went out recently. The next one is allowed after 2026-11-29.
 
-- Stars scanned so far: **190770** (scored: 85484)
-- Last scan results saved: 2026-11-22 23:21
-- Flagged by the AI / wave search: 20983
+- Stars scanned so far: **190864** (scored: 85530)
+- Last scan results saved: 2026-11-23 04:36
+- Flagged by the AI / wave search: 20995
 - Not in any catalog checked: 15053
 - Also look clean (your leads): **908**
 - Strong and not yet emailed: **477**
